@@ -29,7 +29,7 @@ namespace danceCoolWebApi.Controllers
 
         /// <summary>Get specific group by it's id.</summary>
         /// <param name="groupId">Id of the group.</param>
-        [Authorize(Roles = "Mentor, Admin")]
+        //[Authorize(Roles = "Mentor, Admin")]
         [HttpGet]
         [Route("api/groups/{id}")]
         public GroupDTO GetGroupById(int id)
@@ -39,7 +39,7 @@ namespace danceCoolWebApi.Controllers
 
         /// <summary>Get students that is in current group .</summary>
         /// <param name="groupId">Id of the group.</param>
-        [Authorize(Roles = "Mentor, Admin")]
+        //[Authorize(Roles = "Mentor, Admin")]
         [HttpGet]
         [Route("api/groups/{groupId}/users/")]
         public IEnumerable<UserDTO> GetUsersById(int groupId)
@@ -49,7 +49,7 @@ namespace danceCoolWebApi.Controllers
 
         /// <summary>Get students that not in current group .</summary>
         /// <param name="groupId">Id of the group.</param>
-        [Authorize(Roles = "Mentor, Admin")]
+       // [Authorize(Roles = "Mentor, Admin")]
         [HttpGet]
         [Route("api/groups/{groupId}/students/not-in-group")]
         public IEnumerable<UserDTO> GetStudentsNotInCurrentGroup(int groupId)
@@ -60,9 +60,9 @@ namespace danceCoolWebApi.Controllers
         /// <summary>Get Mentors that not in current group .</summary>
         /// <param name="primMentorId">Id of group primary mentor.</param>
         /// <param name="secMentorId">Id of group secondary mentor.</param>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route("api/groups/{groupId}/mentors/not-in-group")]
+        [Route("api/groups/mentors/not-in-group")]
         public IActionResult GetMentorsNotInCurrentGroup(int primMentorId, int secMentorId)
         {
             var currentMentors = new int[2];
@@ -93,7 +93,7 @@ namespace danceCoolWebApi.Controllers
 
         /// <summary>Add new group.</summary>
         /// <param name="newGroup">Group Dto to be created.</param>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("api/groups/new-group/")]
         public void Post(NewGroupDto newGroup)
@@ -102,7 +102,7 @@ namespace danceCoolWebApi.Controllers
 
         /// <summary>Changes Group skill level.</summary>
         /// <param name="changeGroupLevelReqObject">Parameters for group changing. Must include group id and skill Level Id</param>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("api/group/skill-level/")]
         public IActionResult ChangeGroupLevel([FromBody]dynamic changeGroupLevelReqObject)
@@ -119,7 +119,7 @@ namespace danceCoolWebApi.Controllers
 
         /// <summary>Changes Group mentors.</summary>
         /// <param name="changeMentorsReqObject">Requested object from front. Must include groupId newPrimaryMentorId newSecMentorId</param>
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("api/group/mentor")]
         public IActionResult ChangeGroupMentors([FromBody] dynamic changeMentorsReqObject)

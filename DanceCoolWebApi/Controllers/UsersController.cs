@@ -83,12 +83,13 @@ namespace DanceCoolWebApi.Controllers
         }
 
         // POST: api/Users
-        [Authorize(Roles = "Mentor, Admin")]
+        //[Authorize(Roles = "Mentor, Admin")]
         [HttpPost]
         [Route("api/users/")]
-        public void AddNewUser([FromBody] NewUserDTO userDto)
+        public void AddNewUser([FromBody]NewUserDTO userDto)
         {
             _userService.AddUser(userDto);
+            Ok();
         }
 
         [Authorize(Roles = "Mentor, Admin")]

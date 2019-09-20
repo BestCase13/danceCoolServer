@@ -14,7 +14,7 @@ namespace DanceCoolBusinessLogic.Interfaces
         IEnumerable<UserDTO> GetStudentsNotInCurrentGroup(int groupId);
         IEnumerable<UserDTO> GetMentors();
         IEnumerable<UserDTO> GetMentorsNotInGroup(int[] usedMentors);
-        void AddUser(NewUserDTO userDTO);
+        UserDTO AddUser(NewUserDTO userDTO);
         void AddUserToGroup(int userId, int groupId);
         IEnumerable<UserDTO> Search(string key);
         IEnumerable<RoleDto> GetAllRoles();
