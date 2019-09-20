@@ -66,8 +66,6 @@ namespace DanceCoolBusinessLogic.Services
             db.Groups.ChangeGroupLevel(groupId, targetLevelId);
         }
 
-        
-
         private GroupDTO GroupModelToGroupDTO(Group groupModel) => new GroupDTO(
             groupModel.Id,
             groupModel.Direction.Name,  

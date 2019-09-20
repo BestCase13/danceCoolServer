@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DanceCoolDataAccessLogic.EfStructures.Entities;
 using DanceCoolDTO;
 
 namespace DanceCoolBusinessLogic.Interfaces
@@ -15,7 +16,8 @@ namespace DanceCoolBusinessLogic.Interfaces
         IEnumerable<UserDTO> GetMentors();
         IEnumerable<UserDTO> GetMentorsNotInGroup(int[] usedMentors);
         UserDTO AddUser(NewUserDTO userDTO);
-        void AddUserToGroup(int userId, int groupId);
+        UserGroup AddNewUserToGroup(NewUserDTO newUserDTO, int groupId);
+        UserGroup AddUserToGroup(int userId, int groupId);
         IEnumerable<UserDTO> Search(string key);
         IEnumerable<RoleDto> GetAllRoles();
         bool ChangeUserRole(int userId, int newRoleId);

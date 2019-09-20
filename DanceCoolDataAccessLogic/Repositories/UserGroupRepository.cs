@@ -10,14 +10,15 @@ namespace DanceCoolDataAccessLogic.Repositories
         {
         }
 
-        public bool AddUserToGroup(int userId, int groupId)
+        public UserGroup AddUserToGroup(int userId, int groupId)
         {
-            Context.UserGroups.Add(new UserGroup
+            var newUserGroup = new UserGroup
             {
                 UserId = userId,
                 GroupId = groupId
-            });
-            return true;
+            };
+            Context.UserGroups.Add(newUserGroup);
+            return newUserGroup;
         }
     }
 }

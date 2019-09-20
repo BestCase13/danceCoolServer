@@ -22,10 +22,17 @@ namespace DanceCoolBusinessLogic.Services
             return UserModelToUserDTO(newUserModel);
         }
        
-        public void AddUserToGroup(int userId, int groupId)
+        public UserGroup AddNewUserToGroup(NewUserDTO newUserDTO, int groupId)
         {
-            db.UserGroups.AddUserToGroup(userId, groupId);
+            var newUser = AddUser(newUserDTO);
+            return AddUserToGroup(newUser.Id, groupId);
+        }
+
+        public UserGroup AddUserToGroup(int userId, int groupId)
+        {
+            var newUserGroup = db.UserGroups.AddUserToGroup(userId, groupId);
             db.Save();
+            return newUserGroup;
         }
 
         public IEnumerable<UserDTO> GetAllUsers()

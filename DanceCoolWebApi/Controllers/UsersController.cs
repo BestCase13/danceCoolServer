@@ -2,6 +2,7 @@
 using DanceCoolBusinessLogic.Interfaces;
 using DanceCoolDTO;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DanceCoolWebApi.Controllers
@@ -86,22 +87,33 @@ namespace DanceCoolWebApi.Controllers
         //[Authorize(Roles = "Mentor, Admin")]
         [HttpPost]
         [Route("api/users/")]
-        public void AddNewUser([FromBody]NewUserDTO userDto)
+        public IActionResult AddNewUser([FromBody]NewUserDTO userDto)
         {
-            _userService.AddUser(userDto);
-            Ok();
+            var newUserModel = _userService.AddUser(userDto);
+            return Ok(newUserModel);
         }
 
-        [Authorize(Roles = "Mentor, Admin")]
         [HttpPost]
-        [Route("api/group/{groupId}/user/")]
-        public void AddStudentToGroup([FromBody] NewUserGroupDTO newUserGroupDTO)
+        [Route("api/group/{groupId}/new-user")]
+        public IActionResult AddNewUserToGroup(int groupId, [FromBody]NewUserDTO newUser)
         {
-            if (newUserGroupDTO.UserId > 0 && newUserGroupDTO.GroupId > 0)
+            var user = new NewUserDTO (newUser.FirstName, newUser.LastName, newUser.PhoneNumber);
+
+            _userService.AddNewUserToGroup(user, groupId);
+            return Ok();
+        }
+
+        //[Authorize(Roles = "Mentor, Admin")]
+        [HttpPost]
+        [Route("api/group/user/")]
+        public IActionResult AddStudentToGroup([FromBody] dynamic newStudentGroupConnection)
+        {
+            if (newStudentGroupConnection.studentId > 0 && newStudentGroupConnection.groupId > 0)
             {
-                _userService.AddUserToGroup(newUserGroupDTO.UserId, newUserGroupDTO.GroupId);
-                Ok();
+                _userService.AddUserToGroup(newStudentGroupConnection.studentId, newStudentGroupConnection.studentId);
+                return Ok();
             }
+            return NotFound();
         }
 
         /// <summary>Changes user role.</summary>

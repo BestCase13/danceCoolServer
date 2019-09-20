@@ -47,6 +47,15 @@ namespace danceCoolWebApi.Controllers
             return _userService.GetUsersFromGroup(groupId);
         }
 
+        //[HttpPut]
+        //[Route("api/groups/{groupId}/users/")]
+        //public IEnumerable<UserDTO> AddUsersToGroup(int groupId, [FromBody]List<UserDTO> users)
+        //{
+        //    //return _userService.GetUsersFromGroup(groupId);
+
+
+        //}
+
         /// <summary>Get students that not in current group .</summary>
         /// <param name="groupId">Id of the group.</param>
        // [Authorize(Roles = "Mentor, Admin")]
