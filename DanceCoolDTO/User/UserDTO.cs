@@ -21,18 +21,15 @@ namespace DanceCoolDTO
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         [Required]
-        public int RoleId { get; set; }
-        [Required]
-        public string RoleName { get; set; }
+        public RoleDto Role { get; set; }
 
-        public UserDTO(int id, string firstName, string lastName, string phoneNumber, int roleId, string roleName)
+        public UserDTO(int id, string firstName, string lastName, string phoneNumber, RoleDto role)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             PhoneNumber = phoneNumber;
-            RoleId = roleId;
-            RoleName = roleName;
+            Role = role;
         }
     }
 }

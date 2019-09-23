@@ -68,13 +68,10 @@ namespace DanceCoolBusinessLogic.Services
 
         private GroupDTO GroupModelToGroupDTO(Group groupModel) => new GroupDTO(
             groupModel.Id,
-            groupModel.Direction.Name,  
-            groupModel.PrimaryMentorId,
-            groupModel.PrimaryMentor.FirstName,
-            groupModel.PrimaryMentor.LastName,
-            groupModel.SecondaryMentorId ?? 0,
-            groupModel.SecondaryMentor?.FirstName,
-            groupModel.SecondaryMentor?.LastName,
-            groupModel.Level?.Name);
+            groupModel.Direction.Name,
+            groupModel.Level?.Name,
+            groupModel.PrimaryMentor,
+            groupModel.SecondaryMentor
+           );
     }
 }

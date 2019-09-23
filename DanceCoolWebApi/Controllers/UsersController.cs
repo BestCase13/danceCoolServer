@@ -106,11 +106,11 @@ namespace DanceCoolWebApi.Controllers
         //[Authorize(Roles = "Mentor, Admin")]
         [HttpPost]
         [Route("api/group/user/")]
-        public IActionResult AddStudentToGroup([FromBody] dynamic newStudentGroupConnection)
-        {
-            if (newStudentGroupConnection.studentId > 0 && newStudentGroupConnection.groupId > 0)
+        public IActionResult AddStudentToGroup(UserGroupDTO newStudentGroupConnection)
+        {            
+            if (newStudentGroupConnection.StudentId > 0 && newStudentGroupConnection.GroupId > 0)
             {
-                _userService.AddUserToGroup(newStudentGroupConnection.studentId, newStudentGroupConnection.studentId);
+                _userService.AddUserToGroup(newStudentGroupConnection.StudentId, newStudentGroupConnection.GroupId);
                 return Ok();
             }
             return NotFound();
