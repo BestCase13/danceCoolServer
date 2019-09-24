@@ -18,8 +18,8 @@ namespace DanceCoolDataAccessLogic.Repositories
             return Context.Groups
                 .Include(g => g.Direction)
                 .Include(g => g.Level)
-                .Include(g => g.PrimaryMentor)
-                .Include(g => g.SecondaryMentor);
+                .Include(g => g.PrimaryMentor).ThenInclude(prima => prima.Role)
+                .Include(g => g.SecondaryMentor).ThenInclude(seco => seco.Role);
         }
 
         public Group GetGroupById(int groupId)
@@ -27,8 +27,8 @@ namespace DanceCoolDataAccessLogic.Repositories
             return Context.Groups
                 .Include(g => g.Direction)
                 .Include(g => g.Level)
-                .Include(g => g.PrimaryMentor)
-                .Include(g => g.SecondaryMentor)
+                .Include(g => g.PrimaryMentor).ThenInclude(prima => prima.Role)
+                .Include(g => g.SecondaryMentor).ThenInclude(seco => seco.Role)
                 .First(group => group.Id == groupId);
         }
 

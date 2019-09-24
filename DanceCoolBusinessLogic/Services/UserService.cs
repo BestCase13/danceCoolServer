@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DanceCoolBusinessLogic.Helpers;
 using DanceCoolBusinessLogic.Interfaces;
 using DanceCoolDataAccessLogic.EfStructures.Entities;
 using DanceCoolDataAccessLogic.UnitOfWork;
@@ -15,11 +16,11 @@ namespace DanceCoolBusinessLogic.Services
 
         public UserDTO AddUser(NewUserDTO userDTO)
         {
-            var user = NewUserDTOToUserModel(userDTO);
+            var user = DtoFactory.NewUserDtoToUserModel(userDTO);
             db.Users.AddEntity(user);
             db.Save();
             var newUserModel =  db.Users.GetUserByPhoneNumber(userDTO.PhoneNumber);
-            return UserModelToUserDTO(newUserModel);
+            return DtoFactory.UserModelToUserDTO(newUserModel);
         }
        
         public UserGroup AddNewUserToGroup(NewUserDTO newUserDTO, int groupId)
@@ -47,7 +48,7 @@ namespace DanceCoolBusinessLogic.Services
 
             foreach (var user in users)
             {
-                dtos.Add(UserModelToUserDTO(user));
+                dtos.Add(DtoFactory.UserModelToUserDTO(user));
             }
 
             return dtos;
@@ -56,19 +57,19 @@ namespace DanceCoolBusinessLogic.Services
         public UserDTO GetUserById(int id)
         {
             var userModel = db.Users.GetUserById(id);
-            return userModel == null ? null : UserModelToUserDTO(userModel);
+            return userModel == null ? null : DtoFactory.UserModelToUserDTO(userModel);
         }
 
         public UserDTO GetUserByPhoneNumber(string phoneNumber)
         {
             var userModel = db.Users.GetUserByPhoneNumber(phoneNumber);
-            return userModel == null ? null : UserModelToUserDTO(userModel);
+            return userModel == null ? null : DtoFactory.UserModelToUserDTO(userModel);
         }
 
         public UserDTO GetUserByEmail(string email)
         {
             var user = db.Users.GetUserByEmail(email);
-            return user == null ? null : UserModelToUserDTO(user);
+            return user == null ? null : DtoFactory.UserModelToUserDTO(user);
         }
 
         public IEnumerable<UserDTO> GetUsersFromGroup(int groupId)
@@ -84,7 +85,7 @@ namespace DanceCoolBusinessLogic.Services
 
             foreach (var item in userModelsInGroup)
             {
-                usersInGroup.Add(UserModelToUserDTO(item));
+                usersInGroup.Add(DtoFactory.UserModelToUserDTO(item));
             }
 
             return usersInGroup;
@@ -101,7 +102,7 @@ namespace DanceCoolBusinessLogic.Services
 
             foreach (var student in studentsNotInCurrentGroup)
             {
-                studentsDtos.Add(UserModelToUserDTO(student));
+                studentsDtos.Add(DtoFactory.UserModelToUserDTO(student));
             }
 
             return studentsDtos;
@@ -120,7 +121,7 @@ namespace DanceCoolBusinessLogic.Services
 
             foreach (var item in studentModels)
             {
-                studentsDtos.Add(UserModelToUserDTO(item));
+                studentsDtos.Add(DtoFactory.UserModelToUserDTO(item));
             }
             return studentsDtos;
 
@@ -139,7 +140,7 @@ namespace DanceCoolBusinessLogic.Services
 
             foreach (var item in mentorModels)
             {
-                mentorsDtos.Add(UserModelToUserDTO(item));
+                mentorsDtos.Add(DtoFactory.UserModelToUserDTO(item));
             }
             return mentorsDtos;
         }
@@ -154,7 +155,7 @@ namespace DanceCoolBusinessLogic.Services
             var mentorDtos = new List<UserDTO>();
 
             foreach (var item in unUSedMentors)
-                mentorDtos.Add(UserModelToUserDTO(item));
+                mentorDtos.Add(DtoFactory.UserModelToUserDTO(item));
 
             return mentorDtos;
         }
@@ -166,7 +167,7 @@ namespace DanceCoolBusinessLogic.Services
 
             foreach (var user in users)
             {
-                dtos.Add(UserModelToUserDTO(user));
+                dtos.Add(DtoFactory.UserModelToUserDTO(user));
             }
 
             return dtos;
@@ -191,22 +192,8 @@ namespace DanceCoolBusinessLogic.Services
         public bool ChangeUserRole(int userId, int newRoleId)
         {
             return db.Users.ChangeUserRole(userId, newRoleId);
-        }
+        }   
 
-        private UserDTO UserModelToUserDTO(User userModel) => 
-            new UserDTO(userModel.Id,
-                    userModel.FirstName,
-                    userModel.LastName,
-                    userModel.PhoneNumber,
-                    userModel.RoleId,
-                    userModel.Role.RoleName);
 
-        private User NewUserDTOToUserModel(NewUserDTO userDto) =>
-            new User
-            {
-                FirstName = userDto.FirstName,
-                LastName = userDto.LastName,
-                PhoneNumber = userDto.PhoneNumber 
-            };
     }
 }

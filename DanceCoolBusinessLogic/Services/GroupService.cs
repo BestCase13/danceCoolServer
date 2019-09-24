@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DanceCoolBusinessLogic.Helpers;
 using DanceCoolBusinessLogic.Interfaces;
 using DanceCoolDataAccessLogic.EfStructures.Entities;
 using DanceCoolDataAccessLogic.UnitOfWork;
@@ -24,7 +25,7 @@ namespace DanceCoolBusinessLogic.Services
 
             foreach (var group in groups)
             {
-                dtos.Add(GroupModelToGroupDTO(group));
+                dtos.Add(DtoFactory.GroupModelToGroupDTO(group));
             }
 
             return dtos;
@@ -33,7 +34,7 @@ namespace DanceCoolBusinessLogic.Services
         public GroupDTO GetGroupById(int groupId)
         {
             var groupModel = db.Groups.GetGroupById(groupId);
-            return groupModel == null ? null : GroupModelToGroupDTO(groupModel);
+            return groupModel == null ? null : DtoFactory.GroupModelToGroupDTO(groupModel);
         }
 
         public IEnumerable<GroupDTO> GetGroupsByUserId(int userId)
@@ -46,7 +47,7 @@ namespace DanceCoolBusinessLogic.Services
             var groupDtos = new List<GroupDTO>();
 
             foreach (var model in groupModels)
-                groupDtos.Add(GroupModelToGroupDTO(model));
+                groupDtos.Add(DtoFactory.GroupModelToGroupDTO(model));
 
             return groupDtos;
         }
@@ -65,13 +66,5 @@ namespace DanceCoolBusinessLogic.Services
         {
             db.Groups.ChangeGroupLevel(groupId, targetLevelId);
         }
-
-        private GroupDTO GroupModelToGroupDTO(Group groupModel) => new GroupDTO(
-            groupModel.Id,
-            groupModel.Direction.Name,
-            groupModel.Level?.Name,
-            groupModel.PrimaryMentor,
-            groupModel.SecondaryMentor
-           );
     }
 }

@@ -9,7 +9,6 @@ namespace DanceCoolBusinessLogic.Interfaces
         IEnumerable<GroupDTO> GetAllGroups();
         GroupDTO GetGroupById(int groupId);
         IEnumerable<GroupDTO> GetGroupsByUserId(int userId);
-
         //void AddGroup(GroupDTO group);
         IEnumerable<SkillLevel> GetAllSkillLevels();
         void ChangeGroupLevel(int groupId, int targetLevelId);
