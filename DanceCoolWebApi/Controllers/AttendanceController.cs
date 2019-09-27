@@ -30,7 +30,7 @@ namespace DanceCoolWebApiReact.Controllers
             var attendances = _attendanceService.GetPresentStudents(groupId, month);
             if (attendances == null)
             {
-                return NotFound("Жодного відвідування не знайдено за цими параметрами");
+                return BadRequest("Жодного відвідування не знайдено за цими параметрами");
             }
 
             return Ok(attendances);
@@ -43,8 +43,7 @@ namespace DanceCoolWebApiReact.Controllers
         {
             int[] presentStudentsId = presentStudents.checkedStudents.ToObject<int[]>();
 
-            _attendanceService.AddAttendancesFromLesson(lessonId, presentStudentsId);            
-
+            _attendanceService.AddAttendancesFromLesson(lessonId, presentStudentsId);
             return Ok();
         }
     }

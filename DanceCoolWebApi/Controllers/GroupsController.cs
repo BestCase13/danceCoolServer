@@ -91,7 +91,7 @@ namespace danceCoolWebApi.Controllers
 
         /// <summary>Get all skill levels from database.</summary>
         [HttpGet]
-        [Route("api/skill-levels")]
+        [Route("api/groups/skill-levels")]
         public IActionResult GetAllSkillLevels()
         {
             var skillLevels = _groupService.GetAllSkillLevels();
