@@ -18,11 +18,19 @@ namespace DanceCoolBusinessLogic.Helpers
 
         public static GroupDTO GroupModelToGroupDTO(Group groupModel) => new GroupDTO(
             groupModel.Id,
-            groupModel.Direction.Name,
-            groupModel.Level?.Name,
+            DanceDirectionModelToDTO(groupModel.Direction),
+            groupModel.Level == null ? null : SkillLevelModelToDto(groupModel.Level),
             UserModelToUserDTO(groupModel.PrimaryMentor),
             groupModel.SecondaryMentor == null ? null: UserModelToUserDTO(groupModel.SecondaryMentor)
            );
+
+        public static DanceDirectionDTO DanceDirectionModelToDTO(DanceDirection danceDirectionModel) => 
+            new DanceDirectionDTO(danceDirectionModel.Id, danceDirectionModel.Name);
+
+        public static SkillLevelDTO SkillLevelModelToDto(SkillLevel skillLevelModel) {
+            return new SkillLevelDTO(skillLevelModel.Id, skillLevelModel.Name, skillLevelModel.Description);
+            
+        }
 
         #endregion
         #region Converting DTOs to Models

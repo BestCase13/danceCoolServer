@@ -22,7 +22,6 @@ namespace DanceCoolDTO
         public string PhoneNumber { get; set; }
         [Required]
         public RoleDto Role { get; set; }
-        public object RoleDto { get; set; }
 
         public UserDTO(int id, string firstName, string lastName, string phoneNumber, RoleDto role)
         {

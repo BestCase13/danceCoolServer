@@ -66,28 +66,40 @@ namespace danceCoolWebApi.Controllers
             return _userService.GetStudentsNotInCurrentGroup(groupId);
         }
 
+        [HttpGet]
+        [Route("api/groups/mentors/")]
+        public IActionResult GetMentors()
+        {
+            var mentors = _userService.GetMentors();
+            if (mentors.Count() < 1)
+            {
+                return NoContent();
+            }
+            return Ok(mentors);
+        }
+
         /// <summary>Get Mentors that not in current group .</summary>
         /// <param name="primMentorId">Id of group primary mentor.</param>
         /// <param name="secMentorId">Id of group secondary mentor.</param>
         //[Authorize(Roles = "Admin")]
-        [HttpGet]
-        [Route("api/groups/mentors/not-in-group")]
-        public IActionResult GetMentorsNotInCurrentGroup(int primMentorId, int secMentorId)
-        {
-            var currentMentors = new int[2];
-            if (primMentorId < 1 && secMentorId < 1)
-            {
-                return BadRequest("Подано погані дані викладачів.");
-            }
+        //[HttpGet]
+        //[Route("api/{groupId}/mentors/not-in-group")]
+        //public IActionResult GetMentorsNotInCurrentGroup(int groupId)
+        //{
+        //    var currentMentors = new int[2];
+        //    if (primMentorId < 1 && secMentorId < 1)
+        //    {
+        //        return BadRequest("Подано погані дані викладачів.");
+        //    }
 
-            currentMentors[0] = primMentorId;
-            currentMentors[1] = secMentorId;
+        //    currentMentors[0] = primMentorId;
+        //    currentMentors[1] = secMentorId;
 
-            var unUsedMentors = _userService.GetMentorsNotInGroup(currentMentors);
-            if (unUsedMentors == null) return NotFound("Не знайдено викладачів");
+        //    var unUsedMentors = _userService.GetMentorsNotInGroup(currentMentors);
+        //    if (unUsedMentors == null) return NotFound("Не знайдено викладачів");
 
-            return Ok(unUsedMentors);
-        }
+        //    return Ok(unUsedMentors);
+        //}
 
         /// <summary>Get all skill levels from database.</summary>
         [HttpGet]
