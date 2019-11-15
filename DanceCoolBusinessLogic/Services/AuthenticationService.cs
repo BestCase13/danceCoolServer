@@ -34,14 +34,15 @@ namespace DanceCoolBusinessLogic.Services
             }
             else
             {
-                db.Users.AddEntity(new User
-                {
-                    FirstName = newCredentials.FirstName,
-                    LastName = newCredentials.LastName,
-                    PhoneNumber = newCredentials.PhoneNumber
-                });
+	            var user = new User
+	            {
+		            FirstName = newCredentials.FirstName,
+		            LastName = newCredentials.LastName,
+		            PhoneNumber = newCredentials.PhoneNumber
+	            };
+				db.Users.AddEntity(user);
                 db.Save();
-                existingUserId = db.Users.GetUserByPhoneNumber(newCredentials.PhoneNumber).Id;
+                existingUserId = user.Id;
             }
 
             var formedCredentials = new UserCredential
@@ -87,11 +88,6 @@ namespace DanceCoolBusinessLogic.Services
 
             // authentication successful
             return claimsIdentity;
-        }
-
-        public UserCredential GetCredentialsByMail(string email)
-        {
-            return db.UserCredentials.GetCredentialsByEmail(email);
         }
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

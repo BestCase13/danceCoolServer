@@ -8,6 +8,5 @@ namespace DanceCoolBusinessLogic.Interfaces
     {
         UserCredential RegisterUser(RegistrationUserIdentityDto newCredentials, string password);
         ClaimsIdentity Authenticate(string email, string password);
-        UserCredential GetCredentialsByMail(string email);
     }
 }
