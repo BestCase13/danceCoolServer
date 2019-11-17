@@ -4,8 +4,7 @@ using DanceCoolDTO;
 namespace DanceCoolWebApi.SignalR
 {
 	public interface IHubContract
-	{
-		Task UserAdded(UserDTO u);
-		Task UserDeleted(UserDTO u);
+    {
+        Task UserAdded(UserDTO user);
 	}
 }

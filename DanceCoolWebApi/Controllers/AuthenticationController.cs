@@ -3,8 +3,11 @@ using System.IdentityModel.Tokens.Jwt;
 using DanceCoolBusinessLogic.Helpers;
 using DanceCoolBusinessLogic.Interfaces;
 using DanceCoolDTO;
+using DanceCoolWebApi.SignalR;
+using DanceCoolWebApi.SignalR.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.IdentityModel.Tokens;
 
 namespace DanceCoolWebApi.Controllers
@@ -15,13 +18,17 @@ namespace DanceCoolWebApi.Controllers
 	{
 		private readonly IAuthenticationService _authenticationService;
 		private readonly IUserService _userService;
+        private readonly IHubContext<AuthenticatedHub, IAuthenticatedContract> _authenticatedHubContext;
 
-		public AuthenticationController(IAuthenticationService authenticationService,
-			IUserService userService)
+        public AuthenticationController(IAuthenticationService authenticationService,
+			IUserService userService, 
+            IHubContext<AuthenticatedHub, IAuthenticatedContract> authenticatedHubContext)
 		{
 			this._authenticationService = authenticationService;
 			this._userService = userService;
-		}
+            _authenticatedHubContext = authenticatedHubContext;
+
+        }
 
 		[AllowAnonymous]
 		[HttpPost]
@@ -54,7 +61,9 @@ namespace DanceCoolWebApi.Controllers
 					tokenLifeTime = 3600000,
 					userId = registeredUser.UserId
 				};
-				return Ok(response);
+                _authenticatedHubContext.Clients.All.UserRegistered(registeredUser.UserId);
+
+                return Ok(response);
 			}
 			catch (AppException ex)
 			{
@@ -92,7 +101,16 @@ namespace DanceCoolWebApi.Controllers
 				tokenLifeTime = 3600000,
 				userId = user.Id
 			};
-			return Ok(response);
+            _authenticatedHubContext.Clients.All.UserAuthorized(user.Id);
+            return Ok(response);
 		}
-	}
+
+        [AllowAnonymous]
+        [HttpGet("api/log-out/{userId}")]
+        public IActionResult LogOut(int userId)
+        {
+            _authenticatedHubContext.Clients.All.UserLoggedOut(userId);
+            return Ok();
+        }
+    }
 }

@@ -32,7 +32,6 @@ namespace DanceCoolWebApi.Controllers
         public async Task Fire()
         {
 	        await _context.Clients.All.UserAdded(_userService.GetAllUsers().First());
-	        //return _userService.GetAllUsers();
         }
 
 		/// <summary>Get all users in database.</summary>
@@ -55,7 +54,7 @@ namespace DanceCoolWebApi.Controllers
 
         /// <summary>Get user by his id in database.</summary>
         /// <param name="userId">Id of the student to be gotten.</param>
-        [Authorize(Roles = "Mentor, Admin")]
+        //[Authorize(Roles = "Mentor, Admin")]
         [HttpGet]
         [Route("api/users/{userId}")]
         public UserDTO GetUserById(int userId)

@@ -78,7 +78,8 @@ namespace DanceCoolWebApi
 			app.UseSignalR(routes =>
 			{
 				routes.MapHub<UsersHub>("/users-hub");
-			});
+                routes.MapHub<AuthenticatedHub>("/authenticated-hub");
+            });
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
