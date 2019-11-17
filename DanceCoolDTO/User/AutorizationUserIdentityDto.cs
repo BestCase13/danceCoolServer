@@ -1,14 +1,14 @@
 ﻿namespace DanceCoolDTO
 {
-    public class AutorizationUserIdentityDto
+    public class AuthorizationUserIdentityDto
     {
-        public string email { get; set; }
-        public string password { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
 
-        public AutorizationUserIdentityDto(string email, string password)
+        public AuthorizationUserIdentityDto(string email, string password)
         {
-            this.email = email;
-            this.password = password;
+            this.Email = email;
+            this.Password = password;
         }
     }
 }

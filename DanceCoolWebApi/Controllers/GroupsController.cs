@@ -5,7 +5,7 @@ using DanceCoolDTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace danceCoolWebApi.Controllers
+namespace DanceCoolWebApi.Controllers
 {
     [ApiController]
     public class GroupsController : ControllerBase

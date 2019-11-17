@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using DanceCoolBusinessLogic.Interfaces;
 using DanceCoolDTO;
+using DanceCoolWebApi.SignalR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DanceCoolWebApi.Controllers
 {
@@ -13,16 +16,27 @@ namespace DanceCoolWebApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
+        private readonly IHubContext<UsersHub, IHubContract> _context;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IHubContext<UsersHub, IHubContract> context)
         {
-            _userService = userService;
+	        _context = context;
+			_userService = userService;
         }
 
         /// <summary>Get all users in database.</summary>
         //[Authorize(Roles = "Admin")]
         [HttpGet]
+        [Route("api/users/fireSignalR")]
+        public async Task Fire()
+        {
+	        await _context.Clients.All.UserAdded(_userService.GetAllUsers().First());
+        }
+
+		/// <summary>Get all users in database.</summary>
+		//[Authorize(Roles = "Admin")]
+		[HttpGet]
         [Route("api/users")]
         public IEnumerable<UserDTO> GetAllUsers()
         {
@@ -40,7 +54,7 @@ namespace DanceCoolWebApi.Controllers
 
         /// <summary>Get user by his id in database.</summary>
         /// <param name="userId">Id of the student to be gotten.</param>
-        [Authorize(Roles = "Mentor, Admin")]
+        //[Authorize(Roles = "Mentor, Admin")]
         [HttpGet]
         [Route("api/users/{userId}")]
         public UserDTO GetUserById(int userId)

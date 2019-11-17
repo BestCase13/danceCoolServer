@@ -7,27 +7,27 @@ using DanceCoolDTO;
 
 namespace DanceCoolBusinessLogic.Services
 {
-    public class UserService : BaseService, IUserService
-    {
-        public UserService(IUnitOfWork db) : base(db)
-        {
+	public class UserService : BaseService, IUserService
+	{
+		public UserService(IUnitOfWork db) : base(db)
+		{
+		}
 
-        }
+		public UserDTO AddUser(NewUserDTO newUserDTO)
+		{
+			var user = DtoFactory.NewUserDtoToUserModel(newUserDTO);
+			db.Users.AddEntity(user);
+			db.Save();
+			var id = user.Id;
+			var newUserModel = db.Users.GetUserById(id);
+			return DtoFactory.UserModelToUserDTO(newUserModel);
+		}
 
-        public UserDTO AddUser(NewUserDTO userDTO)
-        {
-            var user = DtoFactory.NewUserDtoToUserModel(userDTO);
-            db.Users.AddEntity(user);
-            db.Save();
-            var newUserModel =  db.Users.GetUserByPhoneNumber(userDTO.PhoneNumber);
-            return DtoFactory.UserModelToUserDTO(newUserModel);
-        }
-       
-        public UserGroup AddNewUserToGroup(NewUserDTO newUserDTO, int groupId)
-        {
-            var newUser = AddUser(newUserDTO);
-            return AddUserToGroup(newUser.Id, groupId);
-        }
+		public UserGroup AddNewUserToGroup(NewUserDTO newUserDTO, int groupId)
+		{
+			var newUser = AddUser(newUserDTO);
+			return AddUserToGroup(newUser.Id, groupId);
+		}
 
         public UserGroup AddUserToGroup(int userId, int groupId)
         {
@@ -192,8 +192,6 @@ namespace DanceCoolBusinessLogic.Services
         public bool ChangeUserRole(int userId, int newRoleId)
         {
             return db.Users.ChangeUserRole(userId, newRoleId);
-        }   
-
-
+        }
     }
 }
