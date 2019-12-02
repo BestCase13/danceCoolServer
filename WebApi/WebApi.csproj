@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DanceCoolBusinessLogic\DanceCoolBusinessLogic.csproj" />
-    <ProjectReference Include="..\DanceCoolDTO\DanceCoolDTO.csproj" />
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
+    <ProjectReference Include="..\Dto\Dto.csproj" />
   </ItemGroup>
 
 </Project>

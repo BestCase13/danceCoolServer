@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DanceCoolDataAccessLogic\DanceCoolDataAccessLogic.csproj" />
-    <ProjectReference Include="..\DanceCoolDTO\DanceCoolDTO.csproj" />
+    <ProjectReference Include="..\DataAccessLogic\DataAccessLogic.csproj" />
+    <ProjectReference Include="..\DTO\Dto.csproj" />
   </ItemGroup>
 
 </Project>

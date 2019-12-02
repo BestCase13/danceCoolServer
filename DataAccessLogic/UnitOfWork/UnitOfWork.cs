@@ -42,7 +42,7 @@ namespace DanceCoolDataAccessLogic.UnitOfWork
             skillLevels ?? (skillLevels = new SkillLevelRepository(_context));
 
         public IUserCredentialsRepository UserCredentials =>
-            userCredentials ?? (userCredentials = new UserCredentialsRepository(_context));        
+            userCredentials ?? (userCredentials = new UserCredentialsRepository(_context));
 
         public IUserGroupRepository UserGroups => 
             userGroups ?? (userGroups = new UserGroupRepository(_context));

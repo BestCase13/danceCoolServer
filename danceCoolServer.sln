@@ -3,18 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanceCoolDTO", "DanceCoolDTO\DanceCoolDTO.csproj", "{A243FFD8-FD41-4F0B-837D-F79559676767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dto", "Dto\Dto.csproj", "{A243FFD8-FD41-4F0B-837D-F79559676767}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanceCoolDataAccessLogic", "DanceCoolDataAccessLogic\DanceCoolDataAccessLogic.csproj", "{A92617A5-C3D0-40D4-B204-ACA914B28199}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLogic", "DataAccessLogic\DataAccessLogic.csproj", "{A92617A5-C3D0-40D4-B204-ACA914B28199}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanceCoolBusinessLogic", "DanceCoolBusinessLogic\DanceCoolBusinessLogic.csproj", "{B2787E82-C37F-4A0C-8445-0F929B6DD6BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{B2787E82-C37F-4A0C-8445-0F929B6DD6BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{0BCE0C51-226E-4507-8662-1D8990658399}"
 	ProjectSection(SolutionItems) = preProject
 		Migrations.txt = Migrations.txt
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DanceCoolWebApi", "DanceCoolWebApi\DanceCoolWebApi.csproj", "{FD4312F9-9D94-47F3-9BB2-02101062893D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{FD4312F9-9D94-47F3-9BB2-02101062893D}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{15AEC4E2-8B96-406A-B2FE-E44D3EE3070B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,12 @@ Global
 		{FD4312F9-9D94-47F3-9BB2-02101062893D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD4312F9-9D94-47F3-9BB2-02101062893D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD4312F9-9D94-47F3-9BB2-02101062893D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15AEC4E2-8B96-406A-B2FE-E44D3EE3070B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15AEC4E2-8B96-406A-B2FE-E44D3EE3070B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15AEC4E2-8B96-406A-B2FE-E44D3EE3070B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{15AEC4E2-8B96-406A-B2FE-E44D3EE3070B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15AEC4E2-8B96-406A-B2FE-E44D3EE3070B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15AEC4E2-8B96-406A-B2FE-E44D3EE3070B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
