@@ -1,9 +1,9 @@
-﻿using DanceCoolBusinessLogic.Interfaces;
-using DanceCoolBusinessLogic.Services;
+﻿//using DanceCoolBusinessLogic.Interfaces;
+//using DanceCoolBusinessLogic.Services;
 using DanceCoolDataAccessLogic.EfStructures.Context;
-using DanceCoolDataAccessLogic.UnitOfWork;
-using DanceCoolDTO;
-using DanceCoolWebApi.SignalR;
+//using DanceCoolDataAccessLogic.UnitOfWork;
+//using DanceCoolDTO;
+//using DanceCoolWebApi.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,32 +31,30 @@ namespace DanceCoolWebApi
 				(opt => opt.UseSqlServer(Configuration["Data:CommandAPIConnection:ConnectionString"]));
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-				.AddJwtBearer(options =>
-				{
-					options.RequireHttpsMetadata = false;
-					options.TokenValidationParameters = new TokenValidationParameters
-					{
-						ValidateIssuer = true,
-						ValidIssuer = AuthOptions.ISSUER,
-						ValidateAudience = true,
-						ValidAudience = AuthOptions.AUDIENCE,
-						ValidateLifetime = true,
-						IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-						ValidateIssuerSigningKey = true,
-					};
-				});
+			//services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+			//	.AddJwtBearer(options =>
+			//	{
+			//		options.RequireHttpsMetadata = false;
+			//		options.TokenValidationParameters = new TokenValidationParameters
+			//		{
+			//			ValidateIssuer = true,
+			//			ValidIssuer = AuthOptions.ISSUER,
+			//			ValidateAudience = true,
+			//			ValidAudience = AuthOptions.AUDIENCE,
+			//			ValidateLifetime = true,
+			//			IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+			//			ValidateIssuerSigningKey = true,
+			//		};
+			//	});
 
-			services.AddSignalR(c => { });
-
-			services.AddTransient<IUnitOfWork, UnitOfWork>();
-			services.AddTransient<IGroupService, GroupService>();
-			services.AddTransient<IUserService, UserService>();
-			services.AddTransient<ILessonService, LessonService>();
-			services.AddScoped<IAuthenticationService, AuthenticationService>();
-			services.AddTransient<IPaymentService, PaymentService>();
-			services.AddTransient<IAbonnementService, AbonnementService>();
-			services.AddTransient<IAttendanceService, AttendanceService>();
+			//services.AddTransient<IUnitOfWork, UnitOfWork>();
+			//services.AddTransient<IGroupService, GroupService>();
+			//services.AddTransient<IUserService, UserService>();
+			//services.AddTransient<ILessonService, LessonService>();
+			//services.AddScoped<IAuthenticationService, AuthenticationService>();
+			//services.AddTransient<IPaymentService, PaymentService>();
+			//services.AddTransient<IAbonnementService, AbonnementService>();
+			//services.AddTransient<IAttendanceService, AttendanceService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,13 +71,12 @@ namespace DanceCoolWebApi
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseAuthentication();
-			app.UseStaticFiles();
-			app.UseSignalR(routes =>
-			{
-				routes.MapHub<UsersHub>("/users-hub");
-                routes.MapHub<AuthenticatedHub>("/authenticated-hub");
-            });
+			//app.UseAuthentication();
+			//app.UseSignalR(routes =>
+			//{
+			//	routes.MapHub<UsersHub>("/users-hub");
+   //             routes.MapHub<AuthenticatedHub>("/authenticated-hub");
+   //         });
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(

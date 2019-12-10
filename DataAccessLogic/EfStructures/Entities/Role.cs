@@ -2,15 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DanceCoolDataAccessLogic.EfStructures.Entities
+namespace DataAccessLogic.EfStructures.Entities
 {
     public partial class Role
     {
-        public Role()
-        {
-            Users = new HashSet<User>();
-        }
-
         public int Id { get; set; }
         [Required]
         [StringLength(50)]
