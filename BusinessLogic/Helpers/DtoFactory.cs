@@ -1,4 +1,4 @@
-﻿using DanceCoolDataAccessLogic.EfStructures.Entities;
+﻿using DataAccessLogic.EfStructures.Entities;
 using DanceCoolDTO;
 
 namespace DanceCoolBusinessLogic.Helpers

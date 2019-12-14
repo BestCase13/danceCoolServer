@@ -1,88 +1,89 @@
 ﻿//using DanceCoolBusinessLogic.Interfaces;
 //using DanceCoolBusinessLogic.Services;
-using DanceCoolDataAccessLogic.EfStructures.Context;
+using DataAccessLogic.EfStructures.Context;
 //using DanceCoolDataAccessLogic.UnitOfWork;
 //using DanceCoolDTO;
 //using DanceCoolWebApi.SignalR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Hosting;
+
+//using Microsoft.IdentityModel.Tokens;
 
 namespace DanceCoolWebApi
 {
-	public class Startup
-	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-		public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddDbContext<DanceCoolContext>
-				(opt => opt.UseSqlServer(Configuration["Data:CommandAPIConnection:ConnectionString"]));
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<DanceCoolContext>
+                (opt => opt.UseSqlServer(Configuration["Data:CommandAPIConnection:ConnectionString"]));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddSignalR();
 
-			//services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-			//	.AddJwtBearer(options =>
-			//	{
-			//		options.RequireHttpsMetadata = false;
-			//		options.TokenValidationParameters = new TokenValidationParameters
-			//		{
-			//			ValidateIssuer = true,
-			//			ValidIssuer = AuthOptions.ISSUER,
-			//			ValidateAudience = true,
-			//			ValidAudience = AuthOptions.AUDIENCE,
-			//			ValidateLifetime = true,
-			//			IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-			//			ValidateIssuerSigningKey = true,
-			//		};
-			//	});
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //	.AddJwtBearer(options =>
+            //	{
+            //		options.RequireHttpsMetadata = false;
+            //		options.TokenValidationParameters = new TokenValidationParameters
+            //		{
+            //			ValidateIssuer = true,
+            //			ValidIssuer = AuthOptions.ISSUER,
+            //			ValidateAudience = true,
+            //			ValidAudience = AuthOptions.AUDIENCE,
+            //			ValidateLifetime = true,
+            //			IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            //			ValidateIssuerSigningKey = true,
+            //		};
+            //	});
 
-			//services.AddTransient<IUnitOfWork, UnitOfWork>();
-			//services.AddTransient<IGroupService, GroupService>();
-			//services.AddTransient<IUserService, UserService>();
-			//services.AddTransient<ILessonService, LessonService>();
-			//services.AddScoped<IAuthenticationService, AuthenticationService>();
-			//services.AddTransient<IPaymentService, PaymentService>();
-			//services.AddTransient<IAbonnementService, AbonnementService>();
-			//services.AddTransient<IAttendanceService, AttendanceService>();
-		}
+            //services.AddTransient<IUnitOfWork, UnitOfWork>();
+            //services.AddTransient<IGroupService, GroupService>();
+            //services.AddTransient<IUserService, UserService>();
+            //services.AddTransient<ILessonService, LessonService>();
+            //services.AddScoped<IAuthenticationService, AuthenticationService>();
+            //services.AddTransient<IPaymentService, PaymentService>();
+            //services.AddTransient<IAbonnementService, AbonnementService>();
+            //services.AddTransient<IAttendanceService, AttendanceService>();
+        }
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-		{
-			app.UseCors(builder =>
-				builder.WithOrigins("http://localhost:4200")
-					.AllowAnyMethod()
-					.AllowCredentials()
-					.AllowAnyHeader());
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    .AllowAnyHeader());
 
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            
 
-			//app.UseAuthentication();
-			//app.UseSignalR(routes =>
-			//{
-			//	routes.MapHub<UsersHub>("/users-hub");
-   //             routes.MapHub<AuthenticatedHub>("/authenticated-hub");
-   //         });
-			app.UseMvc(routes =>
-			{
-				routes.MapRoute(
-					name: "default",
-					template: "{controller}/{action=Index}/{id?}");
-			});
-		}
-	}
+            //Always needs to be last rows in file
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller}/{action=Index}/{id?}");
+                //endpoints.MapHub<AuthenticatedHub>("/authenticated-hub");
+            });
+        }
+    }
 }

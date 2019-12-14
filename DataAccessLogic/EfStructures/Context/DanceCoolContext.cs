@@ -9,7 +9,7 @@ namespace DataAccessLogic.EfStructures.Context
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
-        public DanceCoolContext()
+        public DanceCoolContext(DbContextOptions options) : base(options)
         {
         }
 
@@ -17,7 +17,7 @@ namespace DataAccessLogic.EfStructures.Context
         {
             if ( !optionsBuilder.IsConfigured )
             {
-                optionsBuilder.UseSqlServer("Data Source=PANCHYSHYN-PC;Initial Catalog=DanceCool;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=DanceCool;Integrated Security=True");
             }
         }
 
