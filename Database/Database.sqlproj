@@ -119,51 +119,34 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Data" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Users.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\UserCredentials.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\DanceDirections.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\SkillLevels.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\Groups.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\UserGroups.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\Lessons.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\Attendances.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\Abonnements.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\Payments.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\Roles.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
+    <None Include="dbo\Data\UserData.sql" />
+    <None Include="dbo\Data\UserCredentialsData.sql" />
+    <None Include="dbo\Data\DanceDirectionsData.sql" />
+    <None Include="dbo\Data\SkillLevelData.sql" />
+    <None Include="dbo\Data\GroupData.sql" />
+    <Build Include="dbo\Tables\Attendance.sql" />
+    <Build Include="dbo\Tables\DanceDirection.sql" />
+    <Build Include="dbo\Tables\Group.sql" />
+    <Build Include="dbo\Tables\Lesson.sql" />
+    <Build Include="dbo\Tables\Payment.sql" />
+    <Build Include="dbo\Tables\Role.sql" />
+    <Build Include="dbo\Tables\SkillLevel.sql" />
+    <Build Include="dbo\Tables\Subscription.sql" />
+    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\UserCredential.sql" />
+    <Build Include="dbo\Tables\UserGroup.sql" />
+    <None Include="Database.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dbo\Data\RoleData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="dbo\Data\_DeployData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dbo\Data\LessonData.sql" />
   </ItemGroup>
 </Project>

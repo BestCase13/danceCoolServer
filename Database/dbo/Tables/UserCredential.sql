@@ -5,7 +5,7 @@
     [PasswordHash] VARBINARY (MAX) NOT NULL,
     [PasswordSalt] VARBINARY (MAX) NOT NULL,
     CONSTRAINT [PK_UserCredentialsId] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_User_UserCredentials] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id]),
+    CONSTRAINT [FK_User_UserCredentials] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id]),
     UNIQUE NONCLUSTERED ([Email] ASC),
     UNIQUE NONCLUSTERED ([UserId] ASC)
 );
