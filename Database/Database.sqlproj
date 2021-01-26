@@ -147,6 +147,8 @@
     <PostDeploy Include="dbo\Data\_DeployData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="dbo\Data\LessonData.sql" />
+    <Build Include="dbo\Data\PaymentData.sql" />
+    <Build Include="dbo\Data\SubscriptionData.sql" />
+    <Build Include="dbo\Data\LessonData.sql" />
   </ItemGroup>
 </Project>
